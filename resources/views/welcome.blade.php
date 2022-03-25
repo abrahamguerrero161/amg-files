@@ -57,4 +57,12 @@
 </html> --}}
 
 <x-app-layout>
+    <x-home-banner>
+        <x-slot name="banner">
+            https://www.cmsnextech.com/wp-content/uploads/2022/03/Banner-2.png
+        </x-slot>
+        <x-slot name="footer_banner">
+            All Rights Reserved © 2022 CMS Nextech
+        </x-slot>
+    </x-home-banner>
 </x-app-layout>

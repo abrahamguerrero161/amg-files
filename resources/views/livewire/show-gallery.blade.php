@@ -21,10 +21,9 @@
                         <div class="flex items-center">
                             <span>Show</span>   
                             <select wire:model="cant" class="mx-2 p-1 form-control">
-                                <option value="10">10</option>
-                                <option value="25">25</option>
-                                <option value="50">50</option>
-                                <option value="100">100</option>
+                                <option value="12">12</option>
+                                <option value="25">24</option>
+                                 
                             </select> 
                             <span>Results</span>
                         </div>
@@ -32,7 +31,7 @@
                             <!--<input type="text" wire:model="search" >-->
                             <x-jet-input class="flex-1 p-3 rounded-full mx-4" placeholder="Search" type="text"  wire:model="search"/>
 
-                            @livewire('create-post', [])
+                           {{-- @livewire('create-post', [])--}}
                     </div>
 
                    @if (count($posts))
@@ -100,9 +99,13 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                
+                            </tbody>
+                        </table>
+                        <div class="flex flex flex-wrap justify-center">
 
                                 @foreach ($posts as $item)
-                                  
+                                  <!--
                                 <tr>
                                    
                                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
@@ -131,12 +134,28 @@
                                           </a>
 
                                     </td>
-                                </tr>
-
+                                </tr>-->
+                                
+                                        <x-product-card>
+                                            <x-slot name="image">
+                                                {{Storage::url('storage/app/public/'.$item->image)}}
+                                            </x-slot>
+                                            <x-slot name="title">
+                                                {{$item->title}} 
+                                            </x-slot>
+                                            <x-slot name="id">
+                                                ID# {{$item->id}} 
+                                            </x-slot>
+                                            <x-slot name="format">
+                                                {{$item->format}} 
+                                            </x-slot>
+                                            <x-slot name="category">
+                                                {{$item->category}} 
+                                            </x-slot>
+                                            {!!$item->content!!}
+                                        </x-product-card>
                                 @endforeach  
-                            </tbody>
-                        </table>
-
+                            </div>
 
                                 @if($posts->hasPages())
 

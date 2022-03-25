@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\ShowGallery;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\ShowPosts;
 /*
@@ -17,4 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', ShowPosts::class)->name('dashboard');
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', ShowPosts::class)->middleware('can:dashboard')->name('dashboard');
+
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/gallery', ShowGallery::class)->name('gallery');

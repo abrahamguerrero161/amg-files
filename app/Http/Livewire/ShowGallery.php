@@ -9,8 +9,9 @@ use Illuminate\Support\Facades\Storage;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
-class ShowPosts extends Component
+class ShowGallery extends Component
 {
+
     use WithFileUploads;
     use WithPagination;
 
@@ -18,7 +19,7 @@ class ShowPosts extends Component
     public $search ='';
     public $sort = 'id';
     public $direction = 'desc';
-    public $cant = '10';
+    public $cant = '12';
     public $readyToLoad = false;
 
     public $open_edit = false;
@@ -28,7 +29,7 @@ class ShowPosts extends Component
 
     protected $queryString = [
 
-        'cant' => ['except' => '10'],
+        'cant' => ['except' => '12'],
         'sort' => ['except' => 'id'],
         'direction' => ['except' => 'desc'],
         'search' => ['except' => '']
@@ -57,23 +58,21 @@ class ShowPosts extends Component
         
     ];
 
- 
-
     public function render()
     {
-                    
-                if($this->readyToLoad){
-                    $posts = Post::where('title', 'like', '%' . $this->search . '%')
-                    ->orWhere('content', 'like', '%' . $this->search . '%')
-                    ->orderBy($this->sort, $this->direction)
-                    ->paginate($this->cant);
-                    //->get();
-                }else{
 
-                    $posts = [];
-                }          
- 
-        return view('livewire.show-posts', compact('posts'));
+        if($this->readyToLoad){
+            $posts = Post::where('title', 'like', '%' . $this->search . '%')
+            ->orWhere('content', 'like', '%' . $this->search . '%')
+            ->orderBy($this->sort, $this->direction)
+            ->paginate($this->cant);
+            //->get();
+        }else{
+
+            $posts = [];
+        }          
+
+        return view('livewire.show-gallery', compact('posts'));
     }
 
 
@@ -135,5 +134,4 @@ class ShowPosts extends Component
 
                 $post->delete();
         }
-
 }
